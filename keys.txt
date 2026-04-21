@@ -1,0 +1,8 @@
+KC_ENTER = 96;
+KC_PLUS  = 78;
+KC_MINUS = 74;
+KC_MULTI = 55;
+KC_NINE  = 73;
+KC_SIX   = 77;
+KC_THREE = 81;
+KC_DOT   = 83;
