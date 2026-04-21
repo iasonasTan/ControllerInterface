@@ -6,7 +6,7 @@
 #include <sys/ioctl.h>
 
 #include "event_listener.h"
-#include "device_loader.h"
+#include "config_loader.h"
 
 int main()
 {
@@ -30,6 +30,8 @@ int main()
 	    return 1;
     }
 
+    EventArray events = loadEvents();
+
     printf("Listening...\n");
     while(1)
     {
@@ -39,7 +41,7 @@ int main()
         if(ev.type == EV_KEY && ev.value == 1)
         {
             printf("Pressed %d\n", ev.code);
-            handle_event(ev.code); // Implemented in event_listener.c
+            handle_event(ev.code, events); // Implemented in event_listener.c
         }
 
     }

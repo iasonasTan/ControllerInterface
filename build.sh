@@ -2,5 +2,5 @@
 gcc \
     event_listener.c \
     controller.c \
-    device_loader.c \
+    config_loader.c \
     -o ctrl
