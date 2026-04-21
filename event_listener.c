@@ -4,6 +4,7 @@
 
 #include "event_listener.h"
 #include "config_loader.h"
+#include "process_executor.h"
 
 // Implement handle method
 void handle_event(int kc, EventArray events)
@@ -12,7 +13,7 @@ void handle_event(int kc, EventArray events)
     for(size_t i = 0; i < events.size; i++) {
         if(events.data[i].keycode == kc) {
             printf("[{%s}]\n", events.data[i].command);
-            system(events.data[i].command);
+            execute_as_user(events.data[i].command);
         }
     }
 }
