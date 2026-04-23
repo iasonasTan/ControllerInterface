@@ -10,9 +10,13 @@
 
 int main()
 {
-    int dev_id = loadID();
-    char dev[256];
-    snprintf(dev, sizeof(dev), "/dev/input/event%d", dev_id);
+    // That stores the path.
+    // Path's length must be less than than this array's length.
+    char dev[1000];
+    int loaded = loadDev(dev, sizeof(dev));
+    if(loaded != 0) {
+        return 1;
+    }
 
     int fd;
     struct input_event ev;

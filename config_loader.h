@@ -1,10 +1,11 @@
 #pragma once
 
 /**
- * @brief Returns input device ID.
- * @return int device ID as integer.
+ * @brief Loads the device path into the provided buffer.
+ * @param buf Buffer to write the path into.
+ * @return 0 on success, -1 on error.
  */
-int loadID();
+int loadDev(char* dest, size_t buff_size);
 
 /**
  * @brief Represents an event.

@@ -4,7 +4,7 @@
 
 #include "config_loader.h"
 
-int loadID()
+int loadDev(char* dest, size_t buff_size)
 {
     FILE* file = fopen("device.conf", "r");
     if(file == NULL)
@@ -13,13 +13,11 @@ int loadID()
         return -1;
     }
 
-    char line[4];
-
-    fgets(line, sizeof(line), file);
+    fgets(dest, buff_size, file);
 
     fclose(file);
 
-    return atoi(line);
+    return 0;
 }
 
 EventArray loadEvents()
