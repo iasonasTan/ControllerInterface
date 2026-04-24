@@ -34,7 +34,8 @@ int main()
 	    return 1;
     }
 
-    EventArray events = loadEvents();
+    EventArray events;
+    int loadRet = loadEvents(&events);
 
     printf("Listening...\n");
     while(1)

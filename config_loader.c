@@ -10,7 +10,7 @@ int loadDev(char* dest, size_t buff_size)
     if(file == NULL)
     {
         perror("Error loading device config file...");
-        return -1;
+        return 1;
     }
 
     fgets(dest, buff_size, file);
@@ -20,25 +20,45 @@ int loadDev(char* dest, size_t buff_size)
     return 0;
 }
 
-EventArray loadEvents()
+void processLine(EventArray* arr, char* id, char* command, int* id_idx, int* command_idx, char* line, int char_idx) {
+    int eqFound = 0;
+    for(int i = 0; i < char_idx; i++)
+    {
+        if(line[i] == '=') {
+            eqFound = 1;
+            continue;
+        }
+        
+        if(line[i] != '\n')
+        {
+            if(eqFound) {
+                if(*command_idx < 999) command[(*command_idx)++] = line[i];
+            } else {
+                if(*id_idx < 9) id[(*id_idx)++] = line[i];
+            }
+        }
+    }
+}
+
+int loadEvents(EventArray* arr)
 {
     FILE* file = fopen("events.conf", "r");
     if(file == NULL)
     {
         perror("Error loading events config file...");
-        // TODO stop app
+        return 1;
     }
 
-    size_t events_len = 0;
+    arr->size = 0;
     char ch;
     while((ch = fgetc(file)) != EOF)
     {
-        if(ch == '\n')events_len++;
+        if(ch == '\n')arr->size++;
     }
     
     rewind(file);
 
-    Event* events = (Event*)calloc(events_len, sizeof(Event));
+    arr->data = (Event*)calloc(arr->size, sizeof(Event));
     int events_idx = 0;
 
     char line[1000];
@@ -49,29 +69,11 @@ EventArray loadEvents()
         char_idx++;
         if(ch == '\n')
         {
-            int eqFound = 0;
             char id[10] = {0};
             char command[1000] = {0}; 
             int id_idx = 0, command_idx = 0;
 
-            for(int i = 0; i < char_idx; i++)
-            {
-                if(line[i] == '=') {
-                    eqFound = 1;
-                    continue;
-                }
-                
-                if(line[i] != '\n')
-                {
-                    if(eqFound) {
-                        if(command_idx < 999)
-                            command[command_idx++] = line[i];
-                    } else {
-                        if(id_idx < 9)
-                            id[id_idx++] = line[i];
-                    }
-                }
-            }
+            processLine(arr, id, command, &id_idx, &command_idx, line, char_idx);
             
             id[id_idx] = '\0';
             command[command_idx] = '\0';
@@ -80,12 +82,12 @@ EventArray loadEvents()
             event.keycode = atoi(id);
             event.command = strdup(command); 
             
-            events[events_idx++] = event;
+            arr->data[events_idx++] = event;
             char_idx = 0;
         }
     }
     
     fclose(file);
 
-    return (EventArray){ .data = events, .size = events_len };
+    return 0;
 }
