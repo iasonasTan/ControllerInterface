@@ -9,3 +9,7 @@ The 'micro controller's' events will be stolen from the OS.
 device.conf contains the path of the input device that will be used.
 events.conf contains the events based on the key codes.
 events.conf must end with an empty line.
+
+## Project
+To compile the project, simply execute `./build.sh` script.
+To run it, you type `sudo ./ctrl`.
