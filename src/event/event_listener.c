@@ -3,7 +3,7 @@
 #include <unistd.h>
 
 #include "event_listener.h"
-#include "config_loader.h"
+#include "../config/config_loader.h"
 #include "process_executor.h"
 
 // Implement handle method

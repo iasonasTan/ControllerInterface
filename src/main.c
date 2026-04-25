@@ -5,8 +5,8 @@
 #include <linux/input.h>
 #include <sys/ioctl.h>
 
-#include "event_listener.h"
-#include "config_loader.h"
+#include "event/event_listener.h"
+#include "config/config_loader.h"
 
 int main()
 {
@@ -17,6 +17,7 @@ int main()
     if(loaded != 0) {
         return 1;
     }
+    printf("Attempting to grab device: %s\n", dev);
 
     int fd;
     struct input_event ev;

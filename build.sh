@@ -3,11 +3,4 @@ set -e
 
 mkdir -p bin/
 
-cd src/
-
-gcc \
-    event_listener.c \
-    controller.c \
-    config_loader.c \
-    process_executor.c \
-    -o ../bin/ctrl
+gcc $(find src/ -type f -name "*.c") -o ./bin/ctrl
