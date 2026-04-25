@@ -20,7 +20,9 @@ int loadDev(char* dest, size_t buff_size)
     return 0;
 }
 
-void processLine(EventArray* arr, char* id, char* command, int* id_idx, int* command_idx, char* line, int char_idx) {
+void processLine(EventArray* arr, char* id, char* command,
+    int* id_idx, int* command_idx, char* line, int char_idx) {
+
     int eqFound = 0;
     for(int i = 0; i < char_idx; i++)
     {

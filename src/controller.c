@@ -46,7 +46,7 @@ int main()
         if(ev.type == EV_KEY && ev.value == 1)
         {
             printf("Pressed %d\n", ev.code);
-            handle_event(ev.code, events); // Implemented in event_listener.c
+            handle_event(ev.code, events);
         }
 
     }
