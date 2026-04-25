@@ -22,7 +22,7 @@ int main()
     int fd;
     struct input_event ev;
 
-    fd = open(dev, O_RDONLY);
+    fd = open(dev, O_RDONLY | O_CLOEXEC);
     if(fd == -1)
     {
         perror("Error reading event file");
