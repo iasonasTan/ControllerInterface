@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "event_listener.h"
-#include "../config/config_loader.h"
-#include "process_executor.h"
+#include "event/event_listener.h"
+#include "event/process_executor.h"
+#include "config/config_loader.h"
 
 // Implement handle method
 void handle_event(int kc, EventArray events)

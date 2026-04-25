@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "config_loader.h"
+#include "config/config_loader.h"
 
 int loadDev(char* dest, size_t buff_size)
 {
